@@ -52,6 +52,7 @@ function D.setup()
     use({
       "folke/tokyonight.nvim",
       config = function()
+        require(config.tokyonight).setup()
         vim.cmd "colorscheme tokyonight"
       end,
     })
@@ -214,16 +215,10 @@ function D.setup()
         require("config.lsp")
       end,
     })
-    -- use({
-    --   "ray-x/go.nvim",
-    --   -- event = "BufReadPre",
-    --   config = function()
-    --     require("config.go").setup()
-    --   end,
-    -- })
-    -- use({
-    --   "ray-x/guihua.lua",
-    -- })
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = { {'nvim-lua/plenary.nvim'} }
+    }
 
     -- Bootstrap Neovim
     if packer_bootstrap then

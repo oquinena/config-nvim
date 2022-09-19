@@ -18,6 +18,7 @@ keymap("i", "jk", "<ESC>", default_opts)
 -- Switch buffer
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", default_opts)
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", default_opts)
+keymap("n", "<S-x>", ":bdelete<CR>", default_opts)
 
 -- NvimTreeToggle
 keymap("n", "<S-t>", ":NvimTreeToggle<CR>", default_opts)

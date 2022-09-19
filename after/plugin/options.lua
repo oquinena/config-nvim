@@ -27,7 +27,7 @@ opt.wildignorecase = true
 opt.wildignore:append("**/node_modules/*")
 opt.wildignore:append("**/.git/*")
 
-opt.guifont = { "JetBrainsMono NF", ":h7" }
+opt.guifont = { "JetBrainsMono NF", ":h8" }
 
 if g.neovide then
   g.neovide_transparency = 1.0

@@ -18,6 +18,7 @@ local servers = {
       },
     },
   },
+  puppet = {},
   html = {},
   jsonls = {
     settings = {

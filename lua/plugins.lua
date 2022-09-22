@@ -52,7 +52,7 @@ function D.setup()
     use({
       "folke/tokyonight.nvim",
       config = function()
-        require(config.tokyonight).setup()
+        -- require(config.tokyonight).setup()
         vim.cmd "colorscheme tokyonight"
       end,
     })
@@ -218,6 +218,30 @@ function D.setup()
     use {
       'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} }
+    }
+    use({
+      "ziontee113/icon-picker.nvim",
+      config = function()
+        require("icon-picker").setup({
+          disable_legacy_commands = true
+    })
+      end,
+      cmd = { "IconPickerNormal", "IconPickerYank", "IconPickerInsert" },
+    })
+
+    -- User interface
+    use {
+      "stevearc/dressing.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("dressing").setup {
+          input = { relative = "editor" },
+          select = {
+            backend = { "telescope", "fzf", "builtin" },
+          },
+        }
+      end,
+      disable = false,
     }
 
     -- Bootstrap Neovim

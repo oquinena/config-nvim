@@ -7,6 +7,7 @@ lsp.ensure_installed({
   'eslint',
   'sumneko_lua',
   'rust_analyzer',
+  'gopls',
 })
 
 local cmp = require('cmp')
@@ -30,9 +31,9 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
     suggest_lsp_servers = false,
     sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
+        error = '✘',
+        warn = '▲',
+        hint = '⚑',
         info = 'I'
     }
 })

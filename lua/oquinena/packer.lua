@@ -49,7 +49,8 @@ return require('packer').startup(function(use)
   }
 
   use("folke/zen-mode.nvim")
-  use("github/copilot.vim")
+  -- use("github/copilot.vim")
+  use { 'codota/tabnine-nvim', run = "./dl_binaries.sh" }
   use {
       'numToStr/Comment.nvim',
       config = function()

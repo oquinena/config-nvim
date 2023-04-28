@@ -13,11 +13,17 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- use({
+	 --  'folke/tokyonight.nvim',
+	 --  config = function()
+		--   vim.cmd('colorscheme tokyonight')
+	 --  end
+  -- })
   use({
-	  'folke/tokyonight.nvim',
-	  config = function()
-		  vim.cmd('colorscheme tokyonight')
-	  end
+      "catppuccin/nvim", as = "catppuccin",
+      config = function ()
+          vim.cmd('colorscheme catppuccin-macchiatto')
+      end
   })
 
   use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
@@ -49,8 +55,8 @@ return require('packer').startup(function(use)
   }
 
   use("folke/zen-mode.nvim")
-  -- use("github/copilot.vim")
-  use { 'codota/tabnine-nvim', run = "./dl_binaries.sh" }
+  use("github/copilot.vim")
+  -- use { 'codota/tabnine-nvim', run = "./dl_binaries.sh" }
   use {
       'numToStr/Comment.nvim',
       config = function()

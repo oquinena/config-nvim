@@ -21,12 +21,20 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
-vim.opt.guifont = "FiraCode Nerd Font:h12"
+vim.opt.guifont = "JetBrainsMono Nerd Font:h11"
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+-- neovide settings
+vim.g.neovide_scale_factor = 1.0
+vim.g.neovide_refresh_rate = 60
+vim.g.neovide_refresh_rate_idle = 5
+-- vim.g.neovide_fullscreen = true
+vim.g.neovide_cursor_antialiasing = true
+
 
 -- vim.opt.colorcolumn = "80"

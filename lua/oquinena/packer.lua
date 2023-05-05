@@ -17,7 +17,12 @@ return require('packer').startup(function(use)
 	  'j-morano/buffer_manager.nvim',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use {
+      "nvim-telescope/telescope-file-browser.nvim",
+      requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  }
 
+  -- THEMES
   -- use({
 	 --  'folke/tokyonight.nvim',
 	 --  config = function()

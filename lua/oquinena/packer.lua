@@ -46,6 +46,12 @@ return require('packer').startup(function(use)
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
+  use {'jay-babu/mason-null-ls.nvim',
+        requires = {
+            {'williamboman/mason.nvim'},
+            {'jose-elias-alvarez/null-ls.nvim'},
+        }
+    }
 
   use {
       'VonHeikemen/lsp-zero.nvim',

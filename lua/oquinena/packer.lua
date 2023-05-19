@@ -41,6 +41,9 @@ return require("packer").startup(function(use)
         end,
     })
 
+    -- show indent lines
+    use("lukas-reineke/indent-blankline.nvim")
+
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "nvim-tree/nvim-web-devicons", opt = true },

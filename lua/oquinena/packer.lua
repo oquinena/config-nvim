@@ -10,7 +10,6 @@ return require("packer").startup(function(use)
     use({
         "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
-        -- or                            , branch = '0.1.x',
         requires = { { "nvim-lua/plenary.nvim" } },
     })
 
@@ -43,6 +42,9 @@ return require("packer").startup(function(use)
 
     -- show indent lines
     use("lukas-reineke/indent-blankline.nvim")
+
+    -- folding
+    use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
     use({
         "nvim-lualine/lualine.nvim",
@@ -84,7 +86,6 @@ return require("packer").startup(function(use)
         },
     })
 
-    use("folke/zen-mode.nvim")
     use("github/copilot.vim")
     -- use { 'codota/tabnine-nvim', run = "./dl_binaries.sh" }
     use({

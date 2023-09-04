@@ -43,8 +43,11 @@ return require("packer").startup(function(use)
     -- show indent lines
     use("lukas-reineke/indent-blankline.nvim")
 
+    -- vimwiki
+    use("vimwiki/vimwiki")
+
     -- folding
-    use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
+    -- use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
     use({
         "nvim-lualine/lualine.nvim",

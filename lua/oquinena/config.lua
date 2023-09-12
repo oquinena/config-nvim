@@ -36,6 +36,6 @@ vim.g.neovide_refresh_rate_idle = 5
 -- vim.g.neovide_fullscreen = true
 vim.g.neovide_cursor_antialiasing = true
 
-vim.g.copilot_filetypes = { yaml = true, yml = true }
+vim.g.copilot_filetypes = { yaml = true, yml = true, md = false, vimwiki = false }
 
 -- vim.opt.colorcolumn = "80"

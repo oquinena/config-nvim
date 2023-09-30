@@ -101,4 +101,12 @@ return require("packer").startup(function(use)
         "mhartington/formatter.nvim",
     })
     use({ "mtdl9/vim-log-highlighting", ft = "log" })
+    use({
+        "m4xshen/autoclose.nvim",
+        config = function()
+            require("autoclose").setup({
+                disabled_filetypes = { "Text", "markdown" },
+            })
+        end,
+    })
 end)

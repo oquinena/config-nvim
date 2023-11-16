@@ -26,10 +26,10 @@ return require("packer").startup(function(use)
 
     -- THEMES
     -- use({
-    --  'folke/tokyonight.nvim',
-    --  config = function()
-    --   vim.cmd('colorscheme tokyonight')
-    --  end
+    --     "folke/tokyonight.nvim",
+    --     config = function()
+    --         vim.cmd("colorscheme tokyonight")
+    --     end,
     -- })
     use({
         "catppuccin/nvim",
@@ -38,6 +38,13 @@ return require("packer").startup(function(use)
             vim.cmd("colorscheme catppuccin-mocha")
         end,
     })
+    -- use({
+    --     "bluz71/vim-nightfly-colors",
+    --     as = "nightfly",
+    --     config = function()
+    --         vim.cmd("colorscheme nightfly")
+    --     end,
+    -- })
 
     -- show indent lines
     use("lukas-reineke/indent-blankline.nvim")

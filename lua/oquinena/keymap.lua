@@ -18,10 +18,10 @@ vim.keymap.set("n", "<leader>svwm", function()
 end)
 
 -- tmux bindings
-vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>")
-vim.keymap.set("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>")
-vim.keymap.set("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>")
-vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>")
+vim.keymap.set("n", "<C-m>", "<cmd> TmuxNavigateLeft<CR>")
+vim.keymap.set("n", "<C-o>", "<cmd> TmuxNavigateRight<CR>")
+vim.keymap.set("n", "<C-n>", "<cmd> TmuxNavigateDown<CR>")
+vim.keymap.set("n", "<C-e>", "<cmd> TmuxNavigateUp<CR>")
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -45,13 +45,19 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- vim.keymap.set("n", "<leader>f", "<cmd>Format<CR>")
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-e>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>e", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>n", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set({ "n", "v" }, "n", "j", { noremap = true })
+vim.keymap.set({ "n", "v" }, "e", "k", { noremap = true })
+vim.keymap.set({ "n", "v" }, "m", "h", { noremap = true })
+vim.keymap.set({ "n", "v" }, "i", "l", { noremap = true })
+vim.keymap.set({ "n", "v" }, "l", "i", { noremap = true })
+vim.keymap.set({ "n", "v" }, "f", "e", { noremap = true })
 
 -- folding
 -- vim.o.foldcolumn = "1" -- '0' is not bad

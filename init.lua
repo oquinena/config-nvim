@@ -1,1 +1,2 @@
-require("oquinena")
+require("oquinena.core")
+require("oquinena.lazy")

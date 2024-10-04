@@ -31,12 +31,8 @@ return {
 
     workspaces = {
       {
-        name = "personal",
-        path = "~/vaults/personal",
-      },
-      {
-        name = "work",
-        path = "~/vaults/work",
+        name = "obsidian-notes",
+        path = "~/vaults/obsidian-notes",
       },
     },
 

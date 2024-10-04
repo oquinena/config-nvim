@@ -10,6 +10,17 @@ return {
   config = function()
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
+    
+    -- pyright config
+    lspconfig.pyright.setup({
+      settings = {
+      python = {
+        analysis = {
+          typeCheckingMode = "basic",
+        },
+      },
+      },
+    })
 
     -- import mason_lspconfig plugin
     local mason_lspconfig = require("mason-lspconfig")

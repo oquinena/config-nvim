@@ -6,28 +6,6 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save current file" })
 keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit neovim" })
 
--- Colemak-dh up/down/right/left with neim
-keymap.set({ "n", "x", "v" }, "n", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-keymap.set({ "n", "x", "v" }, "e", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap.set({ "n", "x", "v" }, "i", "'l'", { expr = true, silent = true })
-keymap.set({ "n", "x", "v" }, "m", "'h'", { expr = true, silent = true })
-keymap.set({ "n", "x", "v", "i" }, "<C-w>n", "<C-w>j", { desc = "Goto the down window" })
-keymap.set({ "n", "x", "v", "i" }, "<C-w>e", "<C-w>k", { desc = "Goto the up window" })
-keymap.set({ "n", "x", "v", "i" }, "<C-w>m", "<C-w>h", { desc = "Goto the left window" })
-keymap.set({ "n", "x", "v", "i" }, "<C-w>i", "<C-w>l", { desc = "Goto the right window" })
-
-
--- Colemak-dh enter insert mode with l and L
-keymap.set({ "n", "v" }, "l", "'i'", { expr = true, silent = true })
-keymap.set({ "n", "v" }, "L", "'I'", { expr = true, silent = true })
-
--- Colemak-dh end of word with f and F
-keymap.set({ "n", "v" }, "f", "'e'", { expr = true, silent = true })
-keymap.set({ "n", "v" }, "F", "'E'", { expr = true, silent = true })
-
--- Exit into normal mode with nh
-keymap.set({ "i", "c" }, "nh", "<Esc>", { silent = true })
-
 -- Lazy
 keymap.set("n", "<leader>L", "<cmd>Lazy<CR>", { desc = "Open Lazy plugin manager" }) --  move current buffer to new tab
 

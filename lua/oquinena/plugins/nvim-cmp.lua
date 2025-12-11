@@ -26,7 +26,7 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
 
     local has_words_before = function()
-      if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+      if vim.api.nvim_get_option_value("buftype", {buf = 0}) == "prompt" then return false end
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
     end
@@ -41,13 +41,17 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert({
-        ["<Tab>"] = vim.schedule_wrap(function(fallback)
-          if cmp.visible() and has_words_before() then
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          -- Check if copilot suggestion is visible
+          local copilot_suggestion = require("copilot.suggestion")
+          if copilot_suggestion.is_visible() then
+            copilot_suggestion.accept()
+          elseif cmp.visible() and has_words_before() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
           else
             fallback()
           end
-        end),
+        end, { "i", "s" }),
         ["<C-e>"] = cmp.mapping.select_prev_item(), -- previous suggestion
         ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -58,8 +62,7 @@ return {
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({
-        { name = "copilot"}, -- Github copilot
-        { name = "nvim_lsp"},
+        { name = "nvim_lsp" },
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths

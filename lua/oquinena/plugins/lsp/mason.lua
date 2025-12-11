@@ -49,33 +49,13 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				"pylint",
+				"goimports", -- go import organizer
+				"gofumpt", -- stricter gofmt
+				"golangci-lint", -- go linter
+				"gomodifytags", -- tool for go.nvim struct tags
+				"impl", -- tool for go.nvim interface implementation
+				"delve", -- go debugger
 			},
 		})
-
-    lua_ls = { settings = { Lua = {
-      workspace = {
-        checkThirdParty = false,
-        library = vim.tbl_deep_extend('force', vim.api.nvim_get_runtime_file("", true), {
-          "${3rd}/luv/library",
-          "${3rd}/busted/library",
-          "/usr/share/awesome/lib",
-          "/usr/share/lua",
-        }),
-      },
-      diagnostics = {
-        globals = {
-          "awesome",
-          "awful",
-          "client",
-          "screen",
-          "tag",
-          "root",
-        },
-      },
-      runtime = { version = 'LuaJIT' },
-      completion = { callSnippet = "Replace", },
-      telemetry = { enable = false, },
-    }}}
-
 	end,
 }

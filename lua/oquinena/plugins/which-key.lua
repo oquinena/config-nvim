@@ -10,6 +10,7 @@ return {
 
     -- Register keymap groups for documentation
     wk.add({
+      { "<leader>a", group = "AI/Copilot Chat" },
       { "<leader>c", group = "Code" },
       { "<leader>d", group = "Diagnostics" },
       { "<leader>f", group = "Find/File" },
@@ -34,6 +35,12 @@ return {
       { "<leader>q", desc = "Quit" },
       { "]c", desc = "Next git hunk" },
       { "[c", desc = "Previous git hunk" },
+      { "]]", desc = "Next reference" },
+      { "[[", desc = "Previous reference" },
+      { "gp", desc = "Peek definitions" },
+      { "gr", desc = "Peek references" },
+      { "gy", desc = "Peek type definitions" },
+      { "gm", desc = "Peek implementations" },
     })
   end,
 }

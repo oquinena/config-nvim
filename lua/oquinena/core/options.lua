@@ -26,6 +26,9 @@ opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
+-- font settings (for GUI clients like Neovide, GVim, etc.)
+opt.guifont = "Fira Code:h14"
+
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 

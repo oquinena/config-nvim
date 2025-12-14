@@ -15,8 +15,17 @@ require("lazy").setup({ { import = "oquinena.plugins" }, { import = "oquinena.pl
   checker = {
     enabled = true,
     notify = false,
+    frequency = 86400, -- check for updates once a day (in seconds)
   },
   change_detection = {
     notify = false,
   },
+})
+
+-- Auto-update plugins once a day in the background
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyCheck",
+  callback = function()
+    require("lazy").sync({ wait = false, show = false })
+  end,
 })

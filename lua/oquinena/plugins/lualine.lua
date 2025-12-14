@@ -1,9 +1,9 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic" },
   config = function()
     local lualine = require("lualine")
-    local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+    local navic = require("nvim-navic")
 
     -- local colors = {
     --   blue = "#65D1FF",
@@ -55,12 +55,18 @@ return {
         theme = "auto",
       },
       sections = {
-        lualine_x = {
+        lualine_c = {
+          { "filename" },
           {
-            lazy_status.updates,
-            cond = lazy_status.has_updates,
-            color = { fg = "#ff9e64" },
+            function()
+              return navic.get_location()
+            end,
+            cond = function()
+              return navic.is_available()
+            end,
           },
+        },
+        lualine_x = {
           { "encoding" },
           { "fileformat" },
           { "filetype" },

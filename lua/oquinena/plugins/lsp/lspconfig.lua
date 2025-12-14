@@ -21,6 +21,15 @@ return {
         -- Disable inlay hints by default
         vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
 
+        -- Attach navic for breadcrumbs
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client and client.server_capabilities.documentSymbolProvider then
+          local navic_ok, navic = pcall(require, "nvim-navic")
+          if navic_ok then
+            navic.attach(client, ev.buf)
+          end
+        end
+
         -- Key mappings with which-key descriptions
         opts.desc = "Show LSP references"
         vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)

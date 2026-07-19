@@ -1,7 +1,7 @@
 return {
-	"williamboman/mason.nvim",
+	"mason-org/mason.nvim",
 	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
@@ -36,9 +36,11 @@ return {
 				"dockerls",
 				"docker_compose_language_service",
 				"gopls",
-				"puppet",
 				"terraformls",
 				"yamlls",
+				"vtsls", -- typescript/javascript
+				"eslint", -- js/ts linting (attaches only in projects with an eslint config)
+				"ansiblels",
 			},
 		})
 
@@ -49,6 +51,8 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				"pylint",
+				"shfmt", -- bash formatter
+				"ansible-lint", -- used by ansiblels for playbook diagnostics
 				"goimports", -- go import organizer
 				"gofumpt", -- stricter gofmt
 				"golangci-lint", -- go linter

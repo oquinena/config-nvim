@@ -15,5 +15,9 @@ return {
       -- for commenting tsx, jsx, svelte, html files
       pre_hook = ts_context_commentstring.create_pre_hook(),
     })
+
+    -- explicit toggle mappings on top of the default gcc/gc
+    vim.keymap.set("n", "<leader>gg", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment line" })
+    vim.keymap.set("x", "<leader>gg", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment selection" })
   end,
 }

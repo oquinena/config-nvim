@@ -20,6 +20,16 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 
 opt.cursorline = true
 
+opt.scrolloff = 8 -- keep context visible above/below the cursor
+
+-- briefly highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
 -- turn on termguicolors for tokyonight colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
@@ -42,5 +52,21 @@ opt.splitbelow = true -- split horizontal window to the bottom
 -- turn off swapfile
 opt.swapfile = false
 
+-- persistent undo across sessions (stored in ~/.local/state/nvim/undo)
+opt.undofile = true
+
 -- set conceallevel to 2 for obsidian
 opt.conceallevel = 2
+
+-- detect ansible files so ansiblels attaches (it only handles ft=yaml.ansible)
+vim.filetype.add({
+  pattern = {
+    [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
+    [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
+    [".*/roles/.*/handlers/.*%.ya?ml"] = "yaml.ansible",
+    [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
+    [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
+    [".*playbook%.ya?ml"] = "yaml.ansible",
+    [".*site%.ya?ml"] = "yaml.ansible",
+  },
+})

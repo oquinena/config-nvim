@@ -1,52 +1,42 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = "main",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   dependencies = {
-    "windwp/nvim-ts-autotag",
+    { "windwp/nvim-ts-autotag", opts = {} },
   },
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require("nvim-treesitter.configs")
+    -- the main branch dropped setup({ ensure_installed }); parsers are
+    -- installed with install() and highlighting is started per buffer
+    require("nvim-treesitter").install({
+      "json",
+      "yaml",
+      "html",
+      "css",
+      "markdown",
+      "markdown_inline",
+      "go",
+      "gomod",
+      "javascript",
+      "typescript",
+      "tsx",
+      "bash",
+      "lua",
+      "vim",
+      "dockerfile",
+      "gitignore",
+      "query",
+      "vimdoc",
+      "terraform",
+      "python",
+    })
 
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
-      highlight = {
-        enable = true,
-      },
-      -- enable indentation
-      indent = { enable = true },
-      -- enable autotagging (w/ nvim-ts-autotag plugin)
-      autotag = {
-        enable = true,
-      },
-      -- ensure these language parsers are installed
-      ensure_installed = {
-        "json",
-        "yaml",
-        "html",
-        "css",
-        "markdown",
-        "markdown_inline",
-        "go",
-        "bash",
-        "puppet",
-        "lua",
-        "vim",
-        "dockerfile",
-        "gitignore",
-        "query",
-        "vimdoc",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("treesitter_highlight", { clear = true }),
+      callback = function(ev)
+        pcall(vim.treesitter.start, ev.buf)
+      end,
     })
   end,
 }

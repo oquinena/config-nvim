@@ -10,7 +10,6 @@ return {
 
     -- Register keymap groups for documentation
     wk.add({
-      { "<leader>a", group = "AI/Copilot Chat" },
       { "<leader>c", group = "Code" },
       { "<leader>d", group = "Diagnostics" },
       { "<leader>f", group = "Find/File" },

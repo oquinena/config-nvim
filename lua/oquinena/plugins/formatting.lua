@@ -7,6 +7,10 @@ return {
 		conform.setup({
 			formatters_by_ft = {
         bash = { "shfmt" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
@@ -15,8 +19,7 @@ return {
 				graphql = { "prettier" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
-        golang = { "gofmt", "gofumpt" },
-        puppet = { "puppet-lint" },
+        go = { "goimports", "gofumpt" },
 			},
 			-- format_on_save = {
 			--   lsp_fallback = true,

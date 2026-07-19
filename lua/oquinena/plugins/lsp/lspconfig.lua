@@ -2,15 +2,14 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
+    "saghen/blink.cmp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    { "folke/lazydev.nvim", ft = "lua", opts = {} },
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
   },
   config = function()
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     -- LSP keybindings
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -59,10 +58,14 @@ return {
         vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
         opts.desc = "Go to previous diagnostic"
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        vim.keymap.set("n", "[d", function()
+          vim.diagnostic.jump({ count = -1, float = true })
+        end, opts)
 
         opts.desc = "Go to next diagnostic"
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        vim.keymap.set("n", "]d", function()
+          vim.diagnostic.jump({ count = 1, float = true })
+        end, opts)
 
         opts.desc = "Show documentation for what is under cursor"
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -130,6 +133,36 @@ return {
             functionTypeParameters = true,
             parameterNames = true,
             rangeVariableTypes = true,
+          },
+        },
+      },
+    })
+
+    -- yamlls: schema-store matching (GitHub Actions, docker-compose, etc.)
+    -- plus the built-in kubernetes schema for manifest paths
+    vim.lsp.config("yamlls", {
+      capabilities = capabilities,
+      settings = {
+        yaml = {
+          validate = true,
+          schemaStore = {
+            enable = true,
+            url = "https://www.schemastore.org/api/json/catalog.json",
+          },
+          schemas = {
+            -- filtered copy of the upstream all.json: top-level resources only,
+            -- because the full oneOf also lists sub-objects and produces
+            -- "matches multiple schemas" noise on valid manifests
+            [vim.fn.stdpath("config") .. "/schemas/kubernetes-resources.json"] = {
+              "*.k8s.yaml",
+              "k8s/**/*.{yml,yaml}",
+              "kubernetes/**/*.{yml,yaml}",
+              "manifests/**/*.{yml,yaml}",
+              "**/cluster-config/**/*.{yml,yaml}",
+              "**/cluster-installers/**/*.{yml,yaml}",
+              "**/cluster-ops/**/*.{yml,yaml}",
+              "**/argocd/**/*.{yml,yaml}",
+            },
           },
         },
       },

@@ -1,24 +1,46 @@
+-- Follows the macOS appearance along with the rest of the stack: kitty
+-- (light-theme.auto.conf / dark-theme.auto.conf), tmux (tmux-dark-notify
+-- sources ~/.tmux/theme-{rose-pine-dawn,nord}.conf),
+-- starship (the `palette =` line, rewritten by the switcher agent) and Claude
+-- Code (`"theme": "auto"`).
+--
+-- Rose Pine Dawn in light, Nord in dark. dark_notify sets
+-- vim.o.background and loads the matching colorscheme when macOS flips, so
+-- the switch is live with no restart.
 return {
-  -- "catppuccin/nvim",
-  -- "gbprod/nord.nvim",
-  "neanias/everforest-nvim",
-  version = false,
-  lazy = false,
-  priority = 1000,
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({
+        variant = "dawn",
+        styles = { italic = true },
+      })
+    end,
+  },
 
-  config = function()
-    require("everforest").setup({
-      background = "soft",
-      transparent_background_level = 0,
-      italics = true,
-      disable_italic_comments = false,
-      inlay_hints_background = "dimmed",
-      on_highlights = function(hl, palette)
-        hl["@string.special.symbol.ruby"] = { link = "@field" }
-        hl["DiagnosticUnderlineWarn"] = { undercurl = true, sp = palette.yellow }
-      end,
-    })
-    vim.opt.background = "dark"
-    vim.cmd("colorscheme everforest")
-  end
+  {
+    "gbprod/nord.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("nord").setup({})
+    end,
+  },
+
+  {
+    -- Watches the macOS appearance, sets vim.o.background and loads the
+    -- scheme below. Needs the dark-notify binary:
+    -- brew install cormacrelf/tap/dark-notify
+    "cormacrelf/dark-notify",
+    lazy = false,
+    priority = 999, -- after both colorschemes are set up
+    config = function()
+      require("dark_notify").run({
+        schemes = { light = "rose-pine", dark = "nord" },
+      })
+    end,
+  },
 }

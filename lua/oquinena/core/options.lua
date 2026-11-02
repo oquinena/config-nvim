@@ -33,7 +33,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- turn on termguicolors for tokyonight colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
-opt.background = "dark" -- colorschemes that can be light or dark will be made dark
+-- 'background' is deliberately not set here: dark_notify (see
+-- plugins/colorscheme.lua) sets it from the macOS appearance at startup and
+-- on every light/dark switch. Forcing it here would fight that.
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- font settings (for GUI clients like Neovide, GVim, etc.)

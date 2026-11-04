@@ -27,7 +27,7 @@ return {
       { "<leader>t", group = "Tab/Toggle" },
       { "<leader>th", desc = "Toggle inlay hints" },
       { "<leader>tb", desc = "Toggle git blame" },
-      { "<leader>td", desc = "Toggle deleted" },
+      { "<leader>td", desc = "Preview hunk inline" },
       { "<leader>x", group = "Trouble/Diagnostics" },
       { "<leader>e", desc = "Toggle file explorer" },
       { "<leader>w", desc = "Save file" },

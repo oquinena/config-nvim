@@ -11,34 +11,9 @@ return {
         changedelete = { text = "~" },
         untracked = { text = "┆" },
       },
-      signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-      numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-      word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-      watch_gitdir = {
-        follow_files = true,
-      },
       attach_to_untracked = true,
-      current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-        delay = 1000,
-        ignore_whitespace = false,
-      },
       current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
-      sign_priority = 6,
-      update_debounce = 100,
-      status_formatter = nil, -- Use default
-      max_file_length = 40000,
-      preview_config = {
-        -- Options passed to nvim_open_win
-        border = "single",
-        style = "minimal",
-        relative = "cursor",
-        row = 0,
-        col = 1,
-      },
+      preview_config = { border = "single" },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
@@ -54,7 +29,7 @@ return {
             return "]c"
           end
           vim.schedule(function()
-            gs.next_hunk()
+            gs.nav_hunk("next")
           end)
           return "<Ignore>"
         end, { expr = true, desc = "Next git hunk" })
@@ -64,7 +39,7 @@ return {
             return "[c"
           end
           vim.schedule(function()
-            gs.prev_hunk()
+            gs.nav_hunk("prev")
           end)
           return "<Ignore>"
         end, { expr = true, desc = "Previous git hunk" })
@@ -79,7 +54,7 @@ return {
           gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Reset hunk" })
         map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage buffer" })
-        map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+        map("n", "<leader>hu", gs.stage_hunk, { desc = "Unstage hunk" })
         map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
         map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
         map("n", "<leader>hb", function()
@@ -90,7 +65,7 @@ return {
         map("n", "<leader>hD", function()
           gs.diffthis("~")
         end, { desc = "Diff this ~" })
-        map("n", "<leader>td", gs.toggle_deleted, { desc = "Toggle deleted" })
+        map("n", "<leader>td", gs.preview_hunk_inline, { desc = "Preview hunk inline" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select hunk" })

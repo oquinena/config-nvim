@@ -7,6 +7,7 @@ return {
 		conform.setup({
 			formatters_by_ft = {
         bash = { "shfmt" },
+        sh = { "shfmt" },
         javascript = { "prettier" },
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
@@ -30,7 +31,7 @@ return {
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			})

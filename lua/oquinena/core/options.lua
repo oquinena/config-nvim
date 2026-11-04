@@ -1,5 +1,3 @@
-vim.cmd("let g:netrw_liststyle = 3")
-
 local opt = vim.opt
 
 opt.relativenumber = true
@@ -9,7 +7,6 @@ opt.number = true
 opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
 opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
 
 opt.wrap = true
 opt.linebreak = true
@@ -41,9 +38,6 @@ opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 -- font settings (for GUI clients like Neovide, GVim, etc.)
 opt.guifont = "Fira Code:h14"
 
--- backspace
-opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
-
 -- clipboard
 opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 
@@ -57,11 +51,15 @@ opt.swapfile = false
 -- persistent undo across sessions (stored in ~/.local/state/nvim/undo)
 opt.undofile = true
 
--- set conceallevel to 2 for obsidian
-opt.conceallevel = 2
-
 -- detect ansible files so ansiblels attaches (it only handles ft=yaml.ansible)
 vim.filetype.add({
+  -- docker_compose_language_service only handles ft=yaml.docker-compose
+  filename = {
+    ["docker-compose.yml"] = "yaml.docker-compose",
+    ["docker-compose.yaml"] = "yaml.docker-compose",
+    ["compose.yml"] = "yaml.docker-compose",
+    ["compose.yaml"] = "yaml.docker-compose",
+  },
   pattern = {
     [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
     [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
@@ -69,6 +67,6 @@ vim.filetype.add({
     [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
     [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
     [".*playbook%.ya?ml"] = "yaml.ansible",
-    [".*site%.ya?ml"] = "yaml.ansible",
+    [".*/site%.ya?ml"] = "yaml.ansible",
   },
 })

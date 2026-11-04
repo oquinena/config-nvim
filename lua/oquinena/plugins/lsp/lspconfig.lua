@@ -9,16 +9,11 @@ return {
     "mason-org/mason-lspconfig.nvim",
   },
   config = function()
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-
     -- LSP keybindings
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
         local opts = { buffer = ev.buf, silent = true }
-
-        -- Disable inlay hints by default
-        vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
 
         -- Attach navic for breadcrumbs
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -103,16 +98,11 @@ return {
 
     -- define per-server config (native 0.11+ API)
     vim.lsp.config("pyright", {
-      capabilities = capabilities,
       settings = { python = { analysis = { typeCheckingMode = "basic" } } },
     })
 
     -- gopls configuration for Go development
     vim.lsp.config("gopls", {
-      capabilities = capabilities,
-      cmd = { "gopls" },
-      filetypes = { "go", "gomod", "gowork", "gotmpl" },
-      root_markers = { "go.work", "go.mod", ".git" },
       settings = {
         gopls = {
           analyses = {
@@ -138,7 +128,6 @@ return {
     -- yamlls: schema-store matching (GitHub Actions, docker-compose, etc.)
     -- plus the built-in kubernetes schema for manifest paths
     vim.lsp.config("yamlls", {
-      capabilities = capabilities,
       settings = {
         yaml = {
           validate = true,
@@ -164,16 +153,5 @@ return {
         },
       },
     })
-
-    -- mason + mason-lspconfig (no handlers anymore)
-    require("mason").setup()
-    require("mason-lspconfig").setup({
-      -- auto :LspEnable for installed servers using your vim.lsp.config() settings
-      automatic_enable = true,
-    })
-
-    -- If you don't want automatic_enable, disable it and explicitly enable:
-    -- vim.lsp.enable("pyright")
-    -- vim.lsp.enable("gopls")
   end,
 }

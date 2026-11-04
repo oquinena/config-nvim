@@ -57,16 +57,6 @@ return {
         opts.desc = "Show line diagnostics"
         vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
-        opts.desc = "Go to previous diagnostic"
-        vim.keymap.set("n", "[d", function()
-          vim.diagnostic.jump({ count = -1, float = true })
-        end, opts)
-
-        opts.desc = "Go to next diagnostic"
-        vim.keymap.set("n", "]d", function()
-          vim.diagnostic.jump({ count = 1, float = true })
-        end, opts)
-
         opts.desc = "Show documentation for what is under cursor"
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
@@ -94,11 +84,18 @@ return {
       update_in_insert = false,
       underline = true,
       severity_sort = true,
+      jump = {
+        on_jump = function(diagnostic, bufnr)
+          if diagnostic then
+            vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+          end
+        end,
+      },
       float = {
         focusable = false,
         style = "minimal",
         border = "rounded",
-        source = "always",
+        source = true,
         header = "",
         prefix = "",
       },

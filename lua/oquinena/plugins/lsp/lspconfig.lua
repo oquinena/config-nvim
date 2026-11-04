@@ -71,7 +71,7 @@ return {
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
         opts.desc = "Restart LSP"
-        vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+        vim.keymap.set("n", "<leader>rs", "<cmd>lsp restart<CR>", opts)
 
         opts.desc = "Toggle inlay hints"
         vim.keymap.set("n", "<leader>th", function()

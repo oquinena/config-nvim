@@ -1,23 +1,19 @@
+-- Commenting itself is native (gc/gcc). This plugin only supplies the right
+-- commentstring inside JSX/TSX, which native gc gets wrong ("//" not "{/* */}").
 return {
-  "numToStr/Comment.nvim",
+  "JoosepAlviste/nvim-ts-context-commentstring",
   event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-  },
   config = function()
-    -- import comment plugin safely
-    local comment = require("Comment")
+    require("ts_context_commentstring").setup({ enable_autocmd = false })
 
-    local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
-
-    -- enable comment
-    comment.setup({
-      -- for commenting tsx, jsx, svelte, html files
-      pre_hook = ts_context_commentstring.create_pre_hook(),
-    })
+    local get_option = vim.filetype.get_option
+    vim.filetype.get_option = function(filetype, option)
+      return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+        or get_option(filetype, option)
+    end
 
     -- explicit toggle mappings on top of the default gcc/gc
-    vim.keymap.set("n", "<leader>gg", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment line" })
-    vim.keymap.set("x", "<leader>gg", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment selection" })
+    vim.keymap.set("n", "<leader>gg", "gcc", { remap = true, desc = "Toggle comment line" })
+    vim.keymap.set("x", "<leader>gg", "gc", { remap = true, desc = "Toggle comment selection" })
   end,
 }

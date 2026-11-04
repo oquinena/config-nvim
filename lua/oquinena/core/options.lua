@@ -62,6 +62,13 @@ opt.conceallevel = 2
 
 -- detect ansible files so ansiblels attaches (it only handles ft=yaml.ansible)
 vim.filetype.add({
+  -- docker_compose_language_service only handles ft=yaml.docker-compose
+  filename = {
+    ["docker-compose.yml"] = "yaml.docker-compose",
+    ["docker-compose.yaml"] = "yaml.docker-compose",
+    ["compose.yml"] = "yaml.docker-compose",
+    ["compose.yaml"] = "yaml.docker-compose",
+  },
   pattern = {
     [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
     [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
@@ -69,6 +76,6 @@ vim.filetype.add({
     [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
     [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
     [".*playbook%.ya?ml"] = "yaml.ansible",
-    [".*site%.ya?ml"] = "yaml.ansible",
+    [".*/site%.ya?ml"] = "yaml.ansible",
   },
 })
